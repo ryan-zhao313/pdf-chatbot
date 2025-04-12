@@ -42,5 +42,3 @@ user_template = '''
     <div class="message">{{MSG}}</div>
 </div>
 '''
-
-print("hello world")
