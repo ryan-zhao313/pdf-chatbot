@@ -6,6 +6,7 @@ from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
 from langchain.vectorstores import FAISS
 from langchain_deepseek import ChatDeepSeek
 from langchain.chat_models import ChatOpenAI
+from langchain.llms import HuggingFaceHub
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import conversational_retrieval
 from htmlTemplate import css, bot_template, user_template
@@ -36,6 +37,7 @@ def get_vectorstore(text_chunks):
 
 def get_conversation_chain(vectorstore):
     llm = ChatDeepSeek()
+    llm = HuggingFaceHub(repo_id="deepseek-ai/DeepSeek-V3-0324", model_kwargs={"temperature":0.5, "max_length":512})
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
     conversation_chain = conversational_retrieval(
         llm=llm,
